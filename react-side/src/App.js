@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getCurrency } from './api-endpoint/CurrencyGetter'
+// import { getCurrency } from './api-endpoint/CurrencyGetter'
+import axios from 'axios'
 
 class App extends Component {
 	state = {
@@ -14,26 +15,32 @@ class App extends Component {
    }
    
    componentDidMount() {
-      this.onClickHandler() 
-      console.log("component mounted");
+      const {userInput} = this.state
+      const api = axios.create({
+         baseURL: 'https://api.fixer.io'
+       })
+       const test =  api.get(`/latest?base=${userInput}`)
+         .then((res) => {
+             res.data
+             console.log(res.data);
+             this.setState({ stats: res.data })
+             console.log(`data loaded ${this.state.stats.date}`);
+            }
+         )
    }
    
    onClickHandler() {
       const {userInput} = this.state
-      getCurrency(userInput)
-         .then((stats) => {
-            this.setState({ stats: stats, error: null })
-            console.log("I'm from App.js");
-            console.log(this.state.stats);
-         }
-      )
-      .catch((error) => {
-         // If 404 not found
-         if (error.response.status === 404) {
-           error = new Error(`The stock symbol '${userInput}' does not exist`)
-         }
-         this.setState({ error: error })
-       })   
+      const api = axios.create({
+         baseURL: 'https://api.fixer.io'
+       })
+       
+      api.get(`/latest?base=${userInput}`)
+         .then((res) => {
+             res.data
+             console.log(res.data);
+            }
+         )
    }
    
 	
@@ -45,7 +52,7 @@ class App extends Component {
 					<h1 className="text-warning text-center">Forex Calculator</h1>
 					<form className="form-search text-center" onChange={ this.onChangeHandler }>
 						<input type="text" className="input-medium search-query" placeholder={this.state.userInput} />
-						<button type="submit" className="btn" onClick={ () => 1+1 }>Search</button>
+						<button type="submit" className="btn" onClick={ this.onClickHandler }>Search</button>
 					</form>
 					<hr/>
 				</div>
@@ -60,7 +67,7 @@ class App extends Component {
 						<tbody>
 						<tr>
                      <td>Currency:</td> 
-                     <td>yay</td>
+                     <td>{ this.state.stats.base }</td>
                   </tr>
 						<tr>
                      <td>Currency:</td> 
