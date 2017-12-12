@@ -227,31 +227,31 @@
    /* PANORAMA PLUGIN DEFINITION
     * ========================== */
 
-   $.fn.panorama = function (option) {
-      return this.each(function () {
-         var $this = $(this)
-            , data = $this.data('panorama')
-            , options = $.extend({}, $.fn.panorama.defaults, typeof option == 'object' && option)
-            , action = typeof option == 'string' ? option : options.slide
-         if (!data) {
-            $this.data('panorama', (data = new Panorama(this, options)))
-         }
-//         if (typeof option == 'number') data.to(option)
-         else if (action){
-            data[action]()
-         }
+//    $.fn.panorama = function (option) {
+//       return this.each(function () {
+//          var $this = $(this)
+//             , data = $this.data('panorama')
+//             , options = $.extend({}, $.fn.panorama.defaults, typeof option == 'object' && option)
+//             , action = typeof option == 'string' ? option : options.slide
+//          if (!data) {
+//             $this.data('panorama', (data = new Panorama(this, options)))
+//          }
+// //         if (typeof option == 'number') data.to(option)
+//          else if (action){
+//             data[action]()
+//          }
 
-      })
-   }
+//       })
+//    }
 
-   $.fn.panorama.defaults = {
-      showscrollbuttons: true,
-      parallax: false,
-      keyboard: true,
-      mousewheel: true,
-      arrangetiles: true
-   }
+   // $.fn.panorama.defaults = {
+   //    showscrollbuttons: true,
+   //    parallax: false,
+   //    keyboard: true,
+   //    mousewheel: true,
+   //    arrangetiles: true
+   // }
 
-   $.fn.panorama.Constructor = Panorama
+   // $.fn.panorama.Constructor = Panorama
 
 }(window.jQuery);
