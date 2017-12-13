@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { getCurrency } from './api-endpoint/CurrencyGetter'
-// import axios from 'axios'
+import './App.css';
 
 class App extends Component {
 	state = {
 		userInput: "AUD",
 		stats: null,
-		error: null
+      error: null,
+      number: 1
    }
    
    load() {
@@ -38,27 +39,36 @@ class App extends Component {
    }
    
    render() {
-      const stats = this.state.stats
+      const {stats, number} = this.state
       
       return (
          <div className="App">
 			<div className="container"> 
 				<div className="row-fluid"> 
-					<h1 className="muted text-center">Forex Generator</h1>
-               <form className="form-search text-center" onChange={ this.onChangeHandler }>
-						<input type="text" className="input-medium search-query" placeholder={this.state.userInput} />
+					<h1 className="muted ">Forex Generator</h1>
+               <form className="form-search " >
+						<input onChange={ this.onChangeHandler } type="text" className="input-medium search-query" placeholder={this.state.userInput} />
 						<button type="submit" className="btn" onClick={ this.onClickHandler }>Search</button>
 					</form>
-               
+
+				</div>
+
+
 					<hr/>
                
-				</div>
-				<div className="row-fulid"> 
-					<h1 className="muted text-center">Latest Stats</h1>
-				</div>
             {!!this.state.stats ?  (
-         
-				<div className="row-fulid"> 
+               <div className="row-fulid"> 
+               <span>AUD </span>
+               <input 
+                  type="text" 
+                  className="input-medium search-query" 
+                  onChange={(e) => { this.setState({ number: e.target.value}) }}
+               />
+                <span> = { this.state.stats.rates['JPY'] * number } JPY</span>
+               <br/>
+
+               <br/>
+					<h1 className="muted ">Latest Stats</h1>
 					<table className="table table-bordered table-hover span4 offset2" style={{width: "70%"}} >
 						<tbody>
 						<tr>
@@ -86,7 +96,7 @@ class App extends Component {
 						</tbody>
 					</table>
 				</div>
-            ) : (<h4 className="text-center"><br/>Stats not loaded🙅</h4>)
+            ) : (<h4 className=""><br/>Stats not loaded🙅</h4>)
             }
 			</div>
 		</div>
