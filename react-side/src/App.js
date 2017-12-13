@@ -45,12 +45,13 @@ class App extends Component {
 			<div className="container"> 
 				<div className="row-fluid"> 
 					<h1 className="muted text-center">Forex Generator</h1>
-					<form className="form-search text-center" onChange={ this.onChangeHandler }>
+               <form className="form-search text-center" onChange={ this.onChangeHandler }>
 						<input type="text" className="input-medium search-query" placeholder={this.state.userInput} />
 						<button type="submit" className="btn" onClick={ this.onClickHandler }>Search</button>
 					</form>
-            <p>userInput = { this.state.userInput }</p>
+               
 					<hr/>
+               
 				</div>
 				<div className="row-fulid"> 
 					<h1 className="muted text-center">Latest Stats</h1>
