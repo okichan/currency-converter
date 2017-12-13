@@ -58,13 +58,25 @@ class App extends Component {
                
             {!!this.state.stats ?  (
                <div className="row-fulid"> 
-               <span>AUD </span>
+               <span>{ stats.base } </span>
                <input 
                   type="text" 
+                  value={ number }
                   className="input-medium search-query" 
                   onChange={(e) => { this.setState({ number: e.target.value}) }}
                />
-                <span> = { this.state.stats.rates['JPY'] * number } JPY</span>
+               <i className="glyphicon icon-transfer" 
+                  style={{margin: "1rem", cursor: "pointer"}}
+                  onClick={() => console.log(1+2) }
+               ></i>
+
+               <input 
+                  type="text" 
+                  value={this.state.stats.rates['JPY'] * number}
+                  className="input-medium search-query" 
+                  onChange={(e) => { this.setState({ number: e.target.value}) }}
+                  />
+               <span>  JPY </span>
                <br/>
 
                <br/>
