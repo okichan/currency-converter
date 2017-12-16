@@ -24,10 +24,10 @@ const AddNewList = ({ addTodo }) => {
    );
 };
 
-const List = ({ items, deleteItem }) => (
+const List = ({ items, deleteItem }) => 
    <ul>
-      {items.map(m => (
-         <li>
+      {items.map((m, index) => (
+         <li key={index} >
             {m.text}{" "}
             <i
                className="glyphicon icon-trashcan pull-right"
@@ -38,6 +38,5 @@ const List = ({ items, deleteItem }) => (
          </li>
       ))}
    </ul>
-);
 
 export { AddNewList, List };

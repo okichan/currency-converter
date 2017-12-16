@@ -47,12 +47,12 @@ class App extends Component {
    };
 
    addTodo = (newTodo) => {
-      console.log("before", this.state.todoList)
       const newTodoObject = { 
-         id: this.state.todoList.length + 1, 
+         id: Math.random(), 
          text: newTodo         
       }
       this.setState({ todoList: [...this.state.todoList, newTodoObject] })
+      
    };
 
    deleteItemHandler = (a) => {
