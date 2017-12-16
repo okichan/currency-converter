@@ -26,8 +26,18 @@ const AddNewList = ({ addTodo }) => {
 
 const List = ({ items, deleteItem }) => (
    <ul>
-      {items.map(m => <li>{m.text} <i className="glyphicon icon-trashcan pull-right" onClick={ deleteItem }></i></li>)}
+      {items.map(m => (
+         <li>
+            {m.text}{" "}
+            <i
+               className="glyphicon icon-trashcan pull-right"
+               onClick={ () => {
+                  deleteItem(m.id)
+               } }
+            />
+         </li>
+      ))}
    </ul>
-)
+);
 
 export { AddNewList, List };

@@ -55,8 +55,13 @@ class App extends Component {
       this.setState({ todoList: [...this.state.todoList, newTodoObject] })
    };
 
-   deleteItemHandler(event) {
-      console.log('AAAAAAAAAAAAAAAAAAAAAAAAA', event)
+   deleteItemHandler = (a) => {
+      let arr = this.state.todoList
+      arr = arr.filter(function(el){
+         return el.id !== a;
+      });
+      console.log(arr)
+      this.setState({ todoList: arr })
     }
 
    render() {
