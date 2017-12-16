@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { getCurrency } from "./api-endpoint/CurrencyGetter";
 import "./App.css";
+import { getCurrency } from "./api-endpoint/CurrencyGetter";
+import {TodoList, List} from "./components/TodoList";
 
 class App extends Component {
    state = {
@@ -8,7 +9,7 @@ class App extends Component {
       stats: null,
       error: null,
       number: 1,
-      todoItem: ""
+      todoList: [1, 2, 3]
    };
 
    load() {
@@ -40,8 +41,14 @@ class App extends Component {
       this.setState({ userInput: event.target.value.toUpperCase() });
    };
 
+   addTodo = (newTodo) => {
+      // this.state.todoList.push(a);
+      console.log(this.state.todoList)
+      this.setState({ todoList: [...this.state.todoList, newTodo] })
+   };
+
    render() {
-      const { stats, number, userInput } = this.state;
+      const { stats, number, userInput, todoList } = this.state;
 
       return (
          <div className="App">
@@ -149,22 +156,8 @@ class App extends Component {
                      <h3 className="mb-10 mt-40">
                         I'm just a random to-do list.
                      </h3>
-
-                     <input
-                        type="text"
-                        className="input-medium search-query"
-                        onChange={e => e.target.value}
-                     />
-                     <button
-                        type="button"
-                        className="btn btn-success btn-medium"
-                        onClick={function createNewTodoList(todo) {
-                           return <li id="todo">{todo}</li>;
-                        }}
-                     >
-                        Create new
-                     </button>
-                     {document.getElementById}
+                     <TodoList addTodo={ this.addTodo } />
+                     <List items={ todoList }/>
                   </div>
                </div>
             </div>
