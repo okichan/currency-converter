@@ -1,10 +1,10 @@
 import React from "react";
 
-const TodoList = ({ addTodo }) => {
+const AddNewList = ({ addTodo }) => {
    let input;
 
    return (
-      <div>
+      <div className="mb-20">
          <input
             ref={node => {
                input = node;
@@ -32,4 +32,4 @@ const List = props => (
   </ul>
 );
 
-export  {TodoList, List};
+export  {AddNewList, List};

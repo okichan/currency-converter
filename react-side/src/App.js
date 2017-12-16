@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { getCurrency } from "./api-endpoint/CurrencyGetter";
-import {TodoList, List} from "./components/TodoList";
+import {AddNewList, List} from "./components/TodoList";
 
 class App extends Component {
    state = {
@@ -9,7 +9,7 @@ class App extends Component {
       stats: null,
       error: null,
       number: 1,
-      todoList: [1, 2, 3]
+      todoList: ["eat", "study", "sing"]
    };
 
    load() {
@@ -46,6 +46,10 @@ class App extends Component {
       console.log(this.state.todoList)
       this.setState({ todoList: [...this.state.todoList, newTodo] })
    };
+
+   deleteItem(event) {
+      this.props.onDeleteItem(this.props.id);
+    }
 
    render() {
       const { stats, number, userInput, todoList } = this.state;
@@ -156,8 +160,8 @@ class App extends Component {
                      <h3 className="mb-10 mt-40">
                         I'm just a random to-do list.
                      </h3>
-                     <TodoList addTodo={ this.addTodo } />
-                     <List items={ todoList }/>
+                     <AddNewList addTodo={ this.addTodo } />
+                     <List items={ todoList } deleteItem={ this.deleteItem }/>
                   </div>
                </div>
             </div>

@@ -12,3 +12,13 @@ html {
 .mt-30 { margin-top: 30px;}
 .mt-40 { margin-top: 40px;}
 
+ul {
+   list-style: none;
+   width: 60%;
+   border: 2px solid gainsboro;
+   margin: 0 auto;
+}
+
+li {
+   border-bottom: 1px dotted gainsboro;
+}
