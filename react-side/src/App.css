@@ -14,11 +14,22 @@ html {
 
 ul {
    list-style: none;
-   width: 60%;
+   width: 40%;
    border: 2px solid gainsboro;
-   margin: 0 auto;
+   margin: 20px auto;
 }
 
 li {
+   text-align: left;
+   padding: 10px 19px;
    border-bottom: 1px dotted gainsboro;
+}
+
+i {
+   font-size: 1.2rem;
+   transition: .4s;
+}
+
+i:hover {
+   color: red;
 }

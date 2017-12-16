@@ -9,7 +9,12 @@ class App extends Component {
       stats: null,
       error: null,
       number: 1,
-      todoList: ["eat", "study", "sing"]
+      todoList: [
+         {id: 1, text: "eat"},
+         {id: 2, text: "sing"},
+         {id: 3, text: "wash"},
+         {id: 4, text: "sleep"}
+   ]
    };
 
    load() {
@@ -42,13 +47,16 @@ class App extends Component {
    };
 
    addTodo = (newTodo) => {
-      // this.state.todoList.push(a);
-      console.log(this.state.todoList)
-      this.setState({ todoList: [...this.state.todoList, newTodo] })
+      console.log("before", this.state.todoList)
+      const newTodoObject = { 
+         id: this.state.todoList.length + 1, 
+         text: newTodo         
+      }
+      this.setState({ todoList: [...this.state.todoList, newTodoObject] })
    };
 
-   deleteItem(event) {
-      this.props.onDeleteItem(this.props.id);
+   deleteItemHandler(event) {
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAA', event)
     }
 
    render() {
@@ -161,7 +169,7 @@ class App extends Component {
                         I'm just a random to-do list.
                      </h3>
                      <AddNewList addTodo={ this.addTodo } />
-                     <List items={ todoList } deleteItem={ this.deleteItem }/>
+                     <List items={ todoList } deleteItem={ this.deleteItemHandler }/>
                   </div>
                </div>
             </div>

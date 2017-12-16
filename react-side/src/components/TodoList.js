@@ -4,7 +4,7 @@ const AddNewList = ({ addTodo }) => {
    let input;
 
    return (
-      <div className="mb-20">
+      <div>
          <input
             ref={node => {
                input = node;
@@ -24,12 +24,10 @@ const AddNewList = ({ addTodo }) => {
    );
 };
 
-const List = props => (
-  <ul>
-    {
-      props.items.map((item, index) => <li key={index} >{item}</li>)
-    }
-  </ul>
-);
+const List = ({ items, deleteItem }) => (
+   <ul>
+      {items.map(m => <li>{m.text} <i className="glyphicon icon-trashcan pull-right" onClick={ deleteItem }></i></li>)}
+   </ul>
+)
 
-export  {AddNewList, List};
+export { AddNewList, List };
