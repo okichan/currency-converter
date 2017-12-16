@@ -56,11 +56,9 @@ class App extends Component {
    };
 
    deleteItemHandler = (a) => {
-      let arr = this.state.todoList
-      arr = arr.filter(function(el){
+      let arr = this.state.todoList.filter(el => {
          return el.id !== a;
       });
-      console.log(arr)
       this.setState({ todoList: arr })
     }
 
@@ -174,7 +172,13 @@ class App extends Component {
                         I'm just a random to-do list.
                      </h3>
                      <AddNewList addTodo={ this.addTodo } />
-                     <List items={ todoList } deleteItem={ this.deleteItemHandler }/>
+                     
+                     { todoList.length !== 0 ? 
+                     <List items={ todoList } deleteItem={ this.deleteItemHandler }/> :
+                     <p className="mt-40">none</p>
+                  }
+                     
+                     
                   </div>
                </div>
             </div>
