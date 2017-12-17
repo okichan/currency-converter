@@ -24,19 +24,23 @@ const AddNewList = ({ addTodo }) => {
    );
 };
 
-const List = ({ items, deleteItem }) => 
+const List = ({ items, deleteItem, toggleCompletion }) => (
    <ul>
       {items.map((m, index) => (
-         <li key={index} >
-            {m.text}{" "}
-            <i
-               className="glyphicon icon-trashcan pull-right"
-               onClick={ () => {
-                  deleteItem(m.id)
-               } }
-            />
-         </li>
+            <li key={index} id="test">
+               {m.text}{" "}
+               <span className="clickable" onClick={() => toggleCompletion(items, index)}>
+                  {m.complete ? "✔️" : "😰"}
+               </span>
+               <i
+                  className="glyphicon icon-trashcan pull-right"
+                  onClick={() => {
+                     deleteItem(m.id);
+                  }}
+               />
+            </li>
       ))}
    </ul>
+);
 
 export { AddNewList, List };

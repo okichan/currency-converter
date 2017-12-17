@@ -28,9 +28,18 @@ li {
 i {
    font-size: 1.2rem;
    transition: .4s;
+   cursor: pointer;
 }
 
 i:hover {
    color: red;
+}
+
+.strikethrough {
+   text-decoration: line-through;
+   color: gray;
+}
+
+.clickable {
    cursor: pointer;
 }

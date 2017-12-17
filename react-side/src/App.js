@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { getCurrency } from "./api-endpoint/CurrencyGetter";
-import {AddNewList, List} from "./components/TodoList";
+import { AddNewList, List } from "./components/TodoList";
 
 class App extends Component {
    state = {
@@ -10,11 +10,11 @@ class App extends Component {
       error: null,
       number: 1,
       todoList: [
-         {id: 1, text: "eat"},
-         {id: 2, text: "sing"},
-         {id: 3, text: "wash"},
-         {id: 4, text: "sleep"}
-   ]
+         { id: 1, text: "eat", completed: false },
+         { id: 2, text: "sing", completed: false },
+         { id: 3, text: "wash", completed: false },
+         { id: 4, text: "sleep", completed: false }
+      ]
    };
 
    load() {
@@ -46,21 +46,27 @@ class App extends Component {
       this.setState({ userInput: event.target.value.toUpperCase() });
    };
 
-   addTodo = (newTodo) => {
-      const newTodoObject = { 
-         id: Math.random(), 
-         text: newTodo         
-      }
-      this.setState({ todoList: [...this.state.todoList, newTodoObject] })
-      
+   addTodo = newTodo => {
+      const newTodoObject = {
+         id: Math.random(),
+         text: newTodo,
+         complettion: false
+      };
+      this.setState({ todoList: [...this.state.todoList, newTodoObject] });
    };
 
-   deleteItemHandler = (a) => {
+   deleteItemHandler = a => {
       let arr = this.state.todoList.filter(el => {
          return el.id !== a;
       });
-      this.setState({ todoList: arr })
-    }
+      this.setState({ todoList: arr });
+   };
+
+   changeCompletionStatus = (a, position) => {
+      let updatedObject = a[position]
+      updatedObject.complete = !updatedObject.complete 
+      this.setState({ todoList: a })
+   }
 
    render() {
       const { stats, number, userInput, todoList } = this.state;
@@ -171,14 +177,17 @@ class App extends Component {
                      <h3 className="mb-10 mt-40">
                         I'm just a random to-do list.
                      </h3>
-                     <AddNewList addTodo={ this.addTodo } />
-                     
-                     { todoList.length !== 0 ? 
-                     <List items={ todoList } deleteItem={ this.deleteItemHandler }/> :
-                     <p className="mt-40">none</p>
-                  }
-                     
-                     
+                     <AddNewList addTodo={this.addTodo} />
+                     {todoList.length !== 0 ? (
+                        <List
+                           items={todoList}
+                           deleteItem={this.deleteItemHandler}
+                           toggleCompletion={ this.changeCompletionStatus }
+                           
+                        />
+                     ) : (
+                        <p className="mt-40">none</p>
+                     )}
                   </div>
                </div>
             </div>
