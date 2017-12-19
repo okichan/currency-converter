@@ -5,7 +5,7 @@ import { AddNewList, List } from "./components/TodoList";
 
 class App extends Component {
    state = {
-      userInput: "AUD",
+      userInput: "",
       stats: null,
       error: null,
       number: 1,
@@ -87,11 +87,14 @@ class App extends Component {
       }
       
    changeTextHandler = (item) => {
-      // debugger
       const array = Object.assign({}, this.state.todoList)
       array[item.itemId].text = item.newText
       this.setState({ todoList: [...this.state.todoList]})
-      // console.log(array)
+   }
+
+   showEditFormHandler = (id) => {
+      let toggle = document.getElementById(`form-${id}`)
+      toggle.className = toggle.className === "hidden" ? "show text-left" : "hidden"
    }
 
    render() {
@@ -212,6 +215,7 @@ class App extends Component {
                            toggleAll={ this.toggleAll }
                            editTextValue={ console.log(this.state.editedTextHeldValue) }
                            onSubmit={ this.changeTextHandler }
+                           showEditForm={ this.showEditFormHandler}
                         />
                      ) : (
                         <p className="mt-40">none</p>

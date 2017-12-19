@@ -24,55 +24,80 @@ const AddNewList = ({ addTodo }) => {
    );
 };
 
-const List = ({ items, deleteItem, toggleCompletion, toggleAll, editItem, editTextValue, onSubmit }) => (
+const List = ({
+   items,
+   deleteItem,
+   toggleCompletion,
+   toggleAll,
+   editItem,
+   editTextValue,
+   onSubmit,
+   showEditForm
+}) => (
    <div className="wrapper">
       <div className="span-4 mb-10">
          <button
-            className="pull-left"
+            className="btn btn-info pull-left"
             onClick={() => {
                toggleAll(items);
             }}
          >
-            Tick/Untick all
+            <i className="glyphicon icon-checkmark-4" />
          </button>
       </div>
       <ul>
          {items.map((m, index) => (
             <div key={index}>
-               <li key={index} id="test">
+               <li key={index}>
                   <span
                      className="clickable"
                      onClick={() => toggleCompletion(items, index)}
                   >
-                     {m.completed ? "️️☑️" : "🔲"}
+                     {m.completed ? (
+                        <i className="glyphicon icon-checkbox-checked" />
+                     ) : (
+                        <i className="glyphicon icon-checkbox-unchecked" />
+                     )}
                   </span>
-                  <span
-                     id="todo-item"
-                     onClick={() => {
-                        alert("should go edit mode");
-                     }}
-                  >
+                  <span id="todo-item" onClick={() => showEditForm(index)}>
                      {" "}
                      {m.text}
                   </span>
                   <i
                      className="glyphicon icon-trashcan pull-right"
+                     id="trashcan"
                      onClick={() => {
                         deleteItem(m.id);
                      }}
                   />
                </li>
-               <form onSubmit={(e) => {
-                  e.preventDefault()
-                  const form = e.target
-                  const elements = form.elements
-                  const newText = elements.todoText.value
-                  const itemId = elements.itemId.value
-                  onSubmit({ newText, itemId })
-               }}>
-                  <input type="text" id="name" name="todoText" defaultValue={m.text}/>
-                  <input type="hidden" id="item-id" name="itemId" value={index}/>
-                  <button >save changes</button>
+               <form
+                  id={`form-${index}`}
+                  className="hidden"
+                  onSubmit={e => {
+                     e.preventDefault();
+                     const form = e.target;
+                     const elements = form.elements;
+                     const newText = elements.todoText.value;
+                     const itemId = elements.itemId.value;
+                     onSubmit({ newText, itemId });
+                  }}
+               >
+                  <input
+                     type="text"
+                     id="name"
+                     name="todoText"
+                     defaultValue={m.text}
+                  />
+                  <input
+                     type="hidden"
+                     id="item-id"
+                     name="itemId"
+                     value={index}
+                  />
+                  <span>
+                     <i className="icon-disk" />
+                  </span>
                </form>
             </div>
          ))}

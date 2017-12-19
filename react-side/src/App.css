@@ -24,13 +24,13 @@ li {
    border-bottom: 1px dotted gainsboro;
 }
 
-i {
+#trashcan {
    font-size: 1.2rem;
    transition: .4s;
    cursor: pointer;
 }
 
-i:hover {
+#trashcan:hover {
    color: red;
 }
 
@@ -47,4 +47,19 @@ i:hover {
    width: 40%;
    margin: 0 auto;
    /* border: 2px solid palegoldenrod */
+}
+
+.show {
+   padding-left: 30px;
+   display: block;
+   /* border: 1px solid salmon */
+}
+
+.hidden {
+   display: none;
+   transition: .4s;
+}
+
+form {
+   margin-bottom: 0;
 }
