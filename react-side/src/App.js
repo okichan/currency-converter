@@ -5,7 +5,7 @@ import { AddNewList, List } from "./components/TodoList";
 
 class App extends Component {
    state = {
-      userInput: "",
+      userInput: "AUD",
       stats: null,
       error: null,
       number: 1,
@@ -14,7 +14,8 @@ class App extends Component {
          { id: 2, text: "sing", completed: false },
          { id: 3, text: "wash", completed: false },
          { id: 4, text: "sleep", completed: false }
-      ]
+      ],
+      editedTextHeldValue: ''
    };
 
    load() {
@@ -63,7 +64,6 @@ class App extends Component {
    };
 
    changeCompletionStatus = (a, position) => {
-      debugger   
       let updatedObject = a[position]
       updatedObject.completed = !updatedObject.completed
       this.setState({ todoList: a })
@@ -85,7 +85,14 @@ class App extends Component {
          }
       this.setState({ todoList: items })
       }
-   
+      
+   changeTextHandler = (item) => {
+      // debugger
+      const array = Object.assign({}, this.state.todoList)
+      array[item.itemId].text = item.newText
+      this.setState({ todoList: [...this.state.todoList]})
+      // console.log(array)
+   }
 
    render() {
       const { stats, number, userInput, todoList } = this.state;
@@ -202,7 +209,9 @@ class App extends Component {
                            items={todoList}
                            deleteItem={this.deleteItemHandler}
                            toggleCompletion={ this.changeCompletionStatus }
-                           toggleAll={ this.toggleAll }                            
+                           toggleAll={ this.toggleAll }
+                           editTextValue={ console.log(this.state.editedTextHeldValue) }
+                           onSubmit={ this.changeTextHandler }
                         />
                      ) : (
                         <p className="mt-40">none</p>
