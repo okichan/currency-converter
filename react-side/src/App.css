@@ -14,7 +14,6 @@ html {
 
 ul {
    list-style: none;
-   width: 40%;
    border: 2px solid gainsboro;
    margin: 20px auto;
 }
@@ -42,4 +41,10 @@ i:hover {
 
 .clickable {
    cursor: pointer;
+}
+
+.wrapper {
+   width: 40%;
+   margin: 0 auto;
+   /* border: 2px solid palegoldenrod */
 }

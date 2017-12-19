@@ -63,10 +63,29 @@ class App extends Component {
    };
 
    changeCompletionStatus = (a, position) => {
+      debugger   
       let updatedObject = a[position]
-      updatedObject.complete = !updatedObject.complete 
+      updatedObject.completed = !updatedObject.completed
       this.setState({ todoList: a })
    }
+
+   toggleAll = items => {
+      let completedItems = 0
+      items.forEach(e => {
+         if (e.completed) {
+            completedItems++
+         }
+      });
+
+      if (completedItems === items.length) {
+         items.forEach(e => e.completed = false) 
+      }
+      else {
+         items.forEach(e => e.completed = true)    
+         }
+      this.setState({ todoList: items })
+      }
+   
 
    render() {
       const { stats, number, userInput, todoList } = this.state;
@@ -93,7 +112,7 @@ class App extends Component {
                   </button>
                </form>
             </div>
-            <div className="container">
+            <div className="container  text-center">
                <div className="row-fluid">
                   <div className="mb-40" />
                </div>
@@ -167,13 +186,13 @@ class App extends Component {
                   </div>
                ) : (
                   <div className="row-fluid">
-                     <h4 className="">
+                     <h4 >
                         <br />Stats not loaded🙅
                      </h4>
                   </div>
                )}
                <div className="row-fluid">
-                  <div className="span12">
+                  <div className="span12 text-center">
                      <h3 className="mb-10 mt-40">
                         I'm just a random to-do list.
                      </h3>
@@ -183,7 +202,7 @@ class App extends Component {
                            items={todoList}
                            deleteItem={this.deleteItemHandler}
                            toggleCompletion={ this.changeCompletionStatus }
-                           
+                           toggleAll={ this.toggleAll }                            
                         />
                      ) : (
                         <p className="mt-40">none</p>

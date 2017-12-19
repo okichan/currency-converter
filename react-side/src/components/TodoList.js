@@ -24,14 +24,27 @@ const AddNewList = ({ addTodo }) => {
    );
 };
 
-const List = ({ items, deleteItem, toggleCompletion }) => (
-   <ul>
-      {items.map((m, index) => (
+const List = ({ items, deleteItem, toggleCompletion, toggleAll }) => (
+   <div className="wrapper">
+      <div className="span-4 mb-10">
+         <button
+            className="pull-left"
+
+            onClick={() => { toggleAll(items) }}
+         >
+            Tick/Untick all
+         </button>
+      </div>
+      <ul>
+         {items.map((m, index) => (
             <li key={index} id="test">
-               {m.text}{" "}
-               <span className="clickable" onClick={() => toggleCompletion(items, index)}>
-                  {m.complete ? "✔️" : "😰"}
+               <span
+                  className="clickable"
+                  onClick={() => toggleCompletion(items, index)}
+                  >
+                  {m.completed ? "️️☑️" : "🔲"}
                </span>
+               <span> {m.text}</span>
                <i
                   className="glyphicon icon-trashcan pull-right"
                   onClick={() => {
@@ -39,8 +52,9 @@ const List = ({ items, deleteItem, toggleCompletion }) => (
                   }}
                />
             </li>
-      ))}
-   </ul>
+         ))}
+      </ul>
+   </div>
 );
 
 export { AddNewList, List };
