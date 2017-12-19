@@ -21,7 +21,10 @@ ul {
 li {
    text-align: left;
    padding: 10px 19px;
-   border-bottom: 1px dotted gainsboro;
+}
+
+li:first-child {
+   border-top: 1px dotted gainsboro;
 }
 
 #trashcan {
@@ -46,20 +49,38 @@ li {
 .wrapper {
    width: 40%;
    margin: 0 auto;
-   /* border: 2px solid palegoldenrod */
 }
 
 .show {
+   /* position: absolute; */
+   /* top: 20px; */
    padding-left: 30px;
    display: block;
-   /* border: 1px solid salmon */
+   background: rgba(243, 243, 238, 0.486);
 }
 
 .hidden {
    display: none;
-   transition: .4s;
 }
 
 form {
    margin-bottom: 0;
+}
+
+.force-center {
+   border: 2px solid palegreen;
+   margin: 0 auto;
+}
+
+.red { border: 1px solid red; }
+.blue { border: 1px solid dodgerblue; }
+.pink { border: 1px solid deeppink; }
+
+i#toggle-all {
+   font-size: 26px;
+   padding-left: 0.8rem;
+   color: blueviolet;
+}
+#toggle-all:hover {
+   text-shadow:0px 3px 4px #bababa;
 }

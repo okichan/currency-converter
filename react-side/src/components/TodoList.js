@@ -4,21 +4,22 @@ const AddNewList = ({ addTodo }) => {
    let input;
 
    return (
-      <div>
+      <div className="input-append">
          <input
             ref={node => {
                input = node;
             }}
+            type="text"
             className="input-medium search-query"
          />
          <button
-            className="btn btn-success btn-medium"
+            className="btn "
             onClick={() => {
                addTodo(input.value);
                input.value = "";
             }}
          >
-            Create new
+            <i className=" icon-plus" />
          </button>
       </div>
    );
@@ -35,17 +36,18 @@ const List = ({
    showEditForm
 }) => (
    <div className="wrapper">
-      <div className="span-4 mb-10">
-         <button
-            className="btn btn-info pull-left"
-            onClick={() => {
-               toggleAll(items);
-            }}
-         >
-            <i className="glyphicon icon-checkmark-4" />
-         </button>
-      </div>
       <ul>
+         <div ><p>&nbsp;
+            <i
+               className="glyphicon icon-checkmark-4 pull-left clickable"
+               id="toggle-all"
+               onClick={() => {
+                  toggleAll(items);
+                  
+               }}
+               />
+               </p>
+         </div>
          {items.map((m, index) => (
             <div key={index}>
                <li key={index}>
@@ -88,6 +90,7 @@ const List = ({
                      id="name"
                      name="todoText"
                      defaultValue={m.text}
+                     style={{ width: "80%" }}
                   />
                   <input
                      type="hidden"
@@ -95,9 +98,9 @@ const List = ({
                      name="itemId"
                      value={index}
                   />
-                  <span>
+                  {/* <span>
                      <i className="icon-disk" />
-                  </span>
+                  </span> */}
                </form>
             </div>
          ))}

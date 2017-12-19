@@ -5,7 +5,7 @@ import { AddNewList, List } from "./components/TodoList";
 
 class App extends Component {
    state = {
-      userInput: "",
+      userInput: "AUD",
       stats: null,
       error: null,
       number: 1,
@@ -15,7 +15,6 @@ class App extends Component {
          { id: 3, text: "wash", completed: false },
          { id: 4, text: "sleep", completed: false }
       ],
-      editedTextHeldValue: ''
    };
 
    load() {
@@ -64,38 +63,38 @@ class App extends Component {
    };
 
    changeCompletionStatus = (a, position) => {
-      let updatedObject = a[position]
-      updatedObject.completed = !updatedObject.completed
-      this.setState({ todoList: a })
-   }
+      let updatedObject = a[position];
+      updatedObject.completed = !updatedObject.completed;
+      this.setState({ todoList: a });
+   };
 
    toggleAll = items => {
-      let completedItems = 0
+      let completedItems = 0;
       items.forEach(e => {
          if (e.completed) {
-            completedItems++
+            completedItems++;
          }
       });
 
       if (completedItems === items.length) {
-         items.forEach(e => e.completed = false) 
+         items.forEach(e => (e.completed = false));
+      } else {
+         items.forEach(e => (e.completed = true));
       }
-      else {
-         items.forEach(e => e.completed = true)    
-         }
-      this.setState({ todoList: items })
-      }
-      
-   changeTextHandler = (item) => {
-      const array = Object.assign({}, this.state.todoList)
-      array[item.itemId].text = item.newText
-      this.setState({ todoList: [...this.state.todoList]})
-   }
+      this.setState({ todoList: items });
+   };
 
-   showEditFormHandler = (id) => {
-      let toggle = document.getElementById(`form-${id}`)
-      toggle.className = toggle.className === "hidden" ? "show text-left" : "hidden"
-   }
+   changeTextHandler = item => {
+      const array = Object.assign({}, this.state.todoList);
+      array[item.itemId].text = item.newText;
+      this.setState({ todoList: [...this.state.todoList] });
+   };
+
+   showEditFormHandler = id => {
+      let toggle = document.getElementById(`form-${id}`);
+      toggle.className =
+         toggle.className === "hidden" ? "show text-left" : "hidden";
+   };
 
    render() {
       const { stats, number, userInput, todoList } = this.state;
@@ -115,112 +114,110 @@ class App extends Component {
                   />&nbsp;
                   <button
                      type="submit"
-                     className="btn btn-large"
+                     className="btn btn-primary btn-large"
                      onClick={this.onClickHandler}
                   >
                      Search
                   </button>
                </form>
             </div>
-            <div className="container  text-center">
-               <div className="row-fluid">
-                  <div className="mb-40" />
-               </div>
 
+            <div className="container-fluid">
                {!!this.state.stats ? (
-                  <div className="row-fulid">
-                     <h1 className="muted mb-20">Calculator</h1>
-                     <span>{stats.base} </span>
-                     <input
-                        type="text"
-                        value={number}
-                        className="input-medium search-query"
-                        onChange={e => {
-                           this.setState({ number: e.target.value });
-                        }}
-                     />
-                     <i
-                        className="glyphicon icon-transfer"
-                        style={{ margin: "1rem", cursor: "pointer" }}
-                        onClick={() =>
-                           alert(
-                              "You wanted to swap right? Sorry that's not working 🙏"
-                           )
-                        }
-                     />
+                  <div>
+                     <div className="row-fulid mb-40">
+                        <h1 className="muted mb-20">Calculator</h1>
+                        <span>{stats.base} </span>
+                        <input
+                           type="text"
+                           value={number}
+                           className="input-medium search-query"
+                           onChange={e => {
+                              this.setState({ number: e.target.value });
+                           }}
+                        />
+                        <i
+                           className="glyphicon icon-transfer"
+                           style={{ margin: "1rem", cursor: "pointer" }}
+                           onClick={() =>
+                              alert(
+                                 "You wanted to swap right? Sorry that's not working 🙏"
+                              )
+                           }
+                        />
 
-                     <input
-                        type="text"
-                        value={this.state.stats.rates["JPY"] * number}
-                        className="input-medium search-query"
-                        onChange={e => {
-                           this.setState({ number: e.target.value });
-                        }}
-                     />
-                     <span> JPY </span>
-                     <hr className="mt-40" />
-                     <h1 className="muted ">Latest Stats</h1>
-                     <table
-                        className="table table-bordered table-hover span4 offset2"
-                        style={{ width: "70%" }}
-                     >
-                        <tbody className="clearfix">
-                           <tr>
-                              <td>Currency:</td>
-                              <td>{stats.base}</td>
-                           </tr>
-                           <tr>
-                              <td>Date:</td>
-                              <td>{stats.date}</td>
-                           </tr>
-                           <tr>
-                              <td>
-                                 <h3>Rates:</h3>
-                              </td>
-                              <td
-                                 style={{ borderLeft: "1px solid transparent" }}
-                              />
-                           </tr>
-                           {Object.entries(stats.rates).map(m => (
-                              <tr key={m[1]}>
-                                 <td>
-                                    <p>{m[0]}</p>
-                                 </td>
-                                 <td>
-                                    <p>{m[1]}</p>
-                                 </td>
-                              </tr>
-                           ))}
-                        </tbody>
-                     </table>
+                        <input
+                           type="text"
+                           value={this.state.stats.rates["JPY"] * number}
+                           className="input-medium search-query"
+                           onChange={e => {
+                              this.setState({ number: e.target.value });
+                           }}
+                        />
+                        <span> JPY </span>
+                     </div>
+                     <hr />
+
+                     <div className="row-fulid">
+                        <h1 className="muted ">Latest Stats</h1>
+                     </div>
+
+                     <div className="row-fluid">
+                        <div className="span4" />
+                        <div className="span4">
+                           <table className="table table-hover table-bordered">
+                              <tbody>
+                                 <tr>
+                                    <td>Currency:</td>
+                                    <td>{stats.base}</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Date:</td>
+                                    <td>{stats.date}</td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <h3>Rates:</h3>
+                                    </td>
+                                    <td
+                                       style={{
+                                          borderLeft: "1px solid transparent"
+                                       }}
+                                    />
+                                 </tr>
+                                 {Object.entries(stats.rates).map(m => (
+                                    <tr key={m[1]}>
+                                       <td>
+                                          <p>{m[0]}</p>
+                                       </td>
+                                       <td>
+                                          <p>{m[1]}</p>
+                                       </td>
+                                    </tr>
+                                 ))}
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
                   </div>
                ) : (
-                  <div className="row-fluid">
-                     <h4 >
-                        <br />Stats not loaded🙅
-                     </h4>
-                  </div>
+                  <h4> Stats not loaded<span role="img" aria-label="emoji">🙅</span> </h4>
                )}
+               <h3 className="mb-10 mt-40">I'm just a random to-do list.</h3>
                <div className="row-fluid">
-                  <div className="span12 text-center">
-                     <h3 className="mb-10 mt-40">
-                        I'm just a random to-do list.
-                     </h3>
-                     <AddNewList addTodo={this.addTodo} />
-                     {todoList.length !== 0 ? (
-                        <List
-                           items={todoList}
-                           deleteItem={this.deleteItemHandler}
-                           toggleCompletion={ this.changeCompletionStatus }
-                           toggleAll={ this.toggleAll }
-                           editTextValue={ console.log(this.state.editedTextHeldValue) }
-                           onSubmit={ this.changeTextHandler }
-                           showEditForm={ this.showEditFormHandler}
-                        />
-                     ) : (
-                        <p className="mt-40">none</p>
-                     )}
-                  </div>
+                  <AddNewList addTodo={this.addTodo} />
+                  {todoList.length !== 0 ? (
+                     <List
+                        items={todoList}
+                        deleteItem={this.deleteItemHandler}
+                        toggleCompletion={this.changeCompletionStatus}
+                        toggleAll={this.toggleAll}
+                        onSubmit={this.changeTextHandler}
+                        showEditForm={this.showEditFormHandler}
+                     />
+                  ) : (
+                     <p className="mt-40">none</p>
+                  )}
                </div>
             </div>
          </div>
