@@ -1,0 +1,25 @@
+get http://localhost:7000/artists/5a4c969f081dcf3f9cf58bd3
+
+###
+get http://localhost:7000/artists/
+
+###
+
+POST http://localhost:7000/artists
+Content-Type: application/json
+
+{
+   "name": "Chicago"
+}
+###
+
+DELETE http://localhost:7000/artists/5a4d6c0302186c2c789b1a6c
+
+###
+
+PUT http://localhost:7000/artists/5a4d68e23a8a273d248ddd20
+Content-Type: application/json
+
+{
+   "name": "Europe"
+}
