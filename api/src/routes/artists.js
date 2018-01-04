@@ -45,17 +45,16 @@ router.post("/artists", function(req, res) {
 router.put("/artists/:id", function(req, res) {
    const attributes = req.body;
    const id = req.params.id;
-   Artist.findByIdAndUpdate(id, attributes, { new: true })
-      .then(artist => {
-         if (artist) {
-            res.status(201).json(artist);
-         } else {
-            res.status(400).json({ error: error });
-         }
-      })
-      .catch(error => {
-         res.status(400).json({errorhaha: error})
-      });
+   Artist.findByIdAndUpdate(id, attributes, { new: true }, function(
+      err,
+      artist
+   ) {
+      if (err) {
+         res.status(400).json({ error: err });
+      } else {
+         res.status(201).json(artist);
+      }
+   });
 });
 
 // delete

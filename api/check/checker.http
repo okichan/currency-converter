@@ -21,5 +21,5 @@ PUT http://localhost:7000/artists/5a4d68e23a8a273d248ddd20
 Content-Type: application/json
 
 {
-   "name": "Europe"
+   "name": "Goblin"
 }

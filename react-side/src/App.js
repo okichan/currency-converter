@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import { getCurrency } from "./api-endpoint/CurrencyGetter";
+import { getCurrency, listArtists } from "./api-endpoint/CurrencyGetter";
 import { AddNewList, List } from "./components/TodoList";
+import { ArtistsList } from "./components/Artists";
 
 class App extends Component {
    state = {
@@ -15,6 +16,7 @@ class App extends Component {
          { id: 3, text: "wash", completed: false },
          { id: 4, text: "sleep", completed: false }
       ],
+      artists: []
    };
 
    load() {
@@ -26,11 +28,15 @@ class App extends Component {
                stats: yay,
                error: null // Clear error
             });
-            console.log(yay);
+            // console.log(yay);
          })
          .catch(error => {
             console.log(error.response);
          });
+
+      listArtists().then(artists => {
+         this.setState({ artists: artists });
+      });
    }
 
    componentDidMount() {
@@ -97,7 +103,7 @@ class App extends Component {
    };
 
    render() {
-      const { stats, number, userInput, todoList } = this.state;
+      const { stats, number, userInput, todoList, artists } = this.state;
 
       return (
          <div className="App">
@@ -121,6 +127,8 @@ class App extends Component {
                   </button>
                </form>
             </div>
+
+            <ArtistsList artists={artists} />
 
             <div className="container-fluid">
                {!!this.state.stats ? (
@@ -201,7 +209,12 @@ class App extends Component {
                      </div>
                   </div>
                ) : (
-                  <h4> Stats not loaded<span role="img" aria-label="emoji">🙅</span> </h4>
+                  <h4>
+                     {" "}
+                     Stats not loaded<span role="img" aria-label="emoji">
+                        🙅
+                     </span>{" "}
+                  </h4>
                )}
                <h3 className="mb-10 mt-40">I'm just a random to-do list.</h3>
                <div className="row-fluid">
