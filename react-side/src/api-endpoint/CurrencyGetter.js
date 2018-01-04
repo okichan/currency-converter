@@ -22,3 +22,9 @@ export function listArtists() {
       return res.data;
    });
 }
+
+export function createArtist(data) {
+   return api2.post('/artists', data)
+     .then((res) => res.data)
+ }
+ 

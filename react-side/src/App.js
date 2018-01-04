@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import { getCurrency, listArtists } from "./api-endpoint/CurrencyGetter";
+import { getCurrency, listArtists, createArtist } from "./api-endpoint/CurrencyGetter";
 import { AddNewList, List } from "./components/TodoList";
-import { ArtistsList } from "./components/Artists";
+import { ArtistList, ArtistForm } from "./components/Artists";
 
 class App extends Component {
    state = {
@@ -102,6 +102,23 @@ class App extends Component {
          toggle.className === "hidden" ? "show text-left" : "hidden";
    };
 
+   onCreateArtist = (name) => {
+      createArtist(name)
+         .then(newArtist => {
+            this.setState(prevState => {
+               // Append to existing products array
+               const updatedArtists = prevState.artists.concat(newArtist)
+               return {
+                  artists: updatedArtists
+               }
+            })
+         })
+      
+      // debugger
+      // if (String(name) === 'a') { alert('it cannot be empty!') } else
+      console.log(name)
+   }
+
    render() {
       const { stats, number, userInput, todoList, artists } = this.state;
 
@@ -128,8 +145,10 @@ class App extends Component {
                </form>
             </div>
 
-            <ArtistsList artists={artists} />
+            <ArtistList artists={artists} />
+            <ArtistForm onSubmit={ this.onCreateArtist } />
 
+<hr/>
             <div className="container-fluid">
                {!!this.state.stats ? (
                   <div>

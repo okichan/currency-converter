@@ -17,9 +17,9 @@ DELETE http://localhost:7000/artists/5a4d6c0302186c2c789b1a6c
 
 ###
 
-PUT http://localhost:7000/artists/5a4d68e23a8a273d248ddd20
+PUT http://localhost:7000/artists/5a4d6c3dd26cfb3a248d6b85
 Content-Type: application/json
 
 {
-   "name": "Goblin"
+   "name": "Bjork"
 }
